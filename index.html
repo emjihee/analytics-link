@@ -3,16 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecting...</title>
-  <!-- meta refresh -->
-  <meta http-equiv="refresh" content="0; url=https://youngone.ap12.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/91C815061988CDF5AF9B1A1881F1EABF/?mode=view">
   <script>
-    // 자바스크립트 리다이렉트 (fallback 보완용)
     window.onload = function() {
-      window.location.href = "https://youngone.ap12.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/91C815061988CDF5AF9B1A1881F1EABF/?mode=view";
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      if (/android/i.test(userAgent)) {
+        // 안드로이드 → SAC Android 전용 URL
+        window.location.href = "https://youngone.ap12.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/91C815061988CDF5AF9B1A1881F1EABF/?mode=view";
+      } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        // iOS → SAC iOS 전용 URL
+        window.location.href = "sap-analytics-cloud://youngone.ap12.hcs.cloud.sap:443/?type=story&id=91C815061988CDF5AF9B1A1881F1EABF&mode=view&tenantId=2";
+      } else {
+        // PC 등 기타 환경 → 일반 웹 URL
+        window.location.href = "https://youngone.ap12.hcs.cloud.sap/sap/fpa/ui/app.html#/story2&/s2/64C00E82FA03BBF37C6CD42C46B64EA4/?mode=view";
+      }
     };
   </script>
 </head>
 <body>
-  <p>Redirecting to SAP Analytics Cloud app...</p>
+  <p>Redirecting...</p>
 </body>
 </html>
